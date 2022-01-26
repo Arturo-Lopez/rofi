@@ -1,0 +1,8 @@
+node_modules
+api/dist
+api/node_modules
+api/.turbo
+web/.next
+web/node_modules
+web/public
+web/.turbo

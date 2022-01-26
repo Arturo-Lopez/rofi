@@ -1,0 +1,16 @@
+{
+  "extends": "@rofi/config/tsconfig/web.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@module/*": ["src/module/*"],
+      "@components/*": ["src/components/*"],
+      "@ui/*": ["src/ui/*"],
+      "@util/*": ["src/util/*"],
+      "@lib/*": ["src/lib/*"],
+      "@api": ["src/generated/graphql.tsx"]
+    }
+  },
+  "include": ["src", "next-env.d.ts"],
+  "exclude": ["node_modules", ".next"]
+}

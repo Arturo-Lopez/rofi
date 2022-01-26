@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Server",
+  "extends": "./base.json",
+  "compilerOptions": {
+    "target": "es2016",
+    "lib": ["ESNext"],
+    "module": "commonjs",
+    "moduleResolution": "node"
+  }
+}

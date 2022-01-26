@@ -1,0 +1,37 @@
+{
+  "name": "@rofi/web",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@rofi/config": "*",
+    "clsx": "^1.1.1",
+    "dayjs": "^1.10.7",
+    "formik": "^2.2.9",
+    "next": "^12.0.7",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-hot-toast": "^2.2.0",
+    "react-icons": "^4.3.1",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.8",
+    "@types/react": "^17.0.38",
+    "@typescript-eslint/eslint-plugin": "^5.9.0",
+    "@typescript-eslint/parser": "^5.9.0",
+    "autoprefixer": "^10.4.2",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^16.1.0",
+    "eslint-config-next": "12.0.7",
+    "eslint-config-prettier": "^8.3.0",
+    "postcss": "^8.4.5",
+    "tailwindcss": "^3.0.12",
+    "typescript": "^4.5.4"
+  }
+}

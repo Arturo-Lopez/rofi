@@ -1,0 +1,98 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  USER
+  ADMIN
+
+  @@map("user_role")
+}
+
+enum AuthProvider {
+  GOOGLE
+
+  @@map("auth_provider")
+}
+
+model User {
+  id              BigInt    @id @default(autoincrement())
+  firstName       String    @map("first_name") @db.VarChar(30)
+  lastName        String    @map("last_name") @db.VarChar(30)
+  email           String    @unique @db.VarChar(250)
+  emailVerifiedAt DateTime? @map("email_verified_at") @db.Timestamptz
+  password        String?
+  passswordSalt   String?   @map("password_salt")
+  picture         String?
+  role            UserRole  @default(USER)
+  updatedAt       DateTime  @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+  createdAt       DateTime  @default(now()) @map("created_at") @db.Timestamptz
+
+  accounts  Account[]
+  userTrees UserTree[]
+
+  @@map("user")
+}
+
+model Account {
+  id         BigInt       @id @default(autoincrement())
+  provider   AuthProvider
+  providerId String       @map("provider_id")
+  user       User         @relation(fields: [userId], references: [id])
+  userId     BigInt       @map("user_id")
+  createdAt  DateTime     @default(now()) @map("created_at") @db.Timestamptz
+
+  @@unique([provider, providerId])
+  @@map("account")
+}
+
+model Project {
+  id          BigInt   @id @default(autoincrement())
+  name        String   @db.VarChar(30)
+  description String   @db.VarChar(300)
+  picture     String?
+  latitude    Float
+  longitude   Float
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  userTrees UserTree[]
+
+  @@map("project")
+}
+
+model Tree {
+  id             BigInt @id @default(autoincrement())
+  name           String @db.VarChar(30)
+  description    String @db.VarChar(300)
+  scientificName String @map("scientific_name") @db.VarChar(50)
+  picture        String
+  cdCompensation Int    @map("cd_compensation")
+  lifeSpan       Int    @map("life_span")
+  height         Int
+  diameter       Int
+  cost           Float
+
+  userTree UserTree[]
+
+  @@map("tree")
+}
+
+model UserTree {
+  id        BigInt  @id @default(autoincrement())
+  tree      Tree    @relation(fields: [treeId], references: [id])
+  treeId    BigInt  @map("tree_id")
+  project   Project @relation(fields: [projectId], references: [id])
+  projectId BigInt  @map("project_id")
+  user      User    @relation(fields: [userId], references: [id])
+  userId    BigInt  @map("user_id")
+
+  @@map("user_tree")
+}
